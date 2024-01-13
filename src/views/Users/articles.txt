@@ -1,0 +1,37 @@
+<template>
+    <div class="container-fluid  mt-5">
+        <div class="row mt-5 align-items-center">
+            <div class="col">
+                <p class="fs-1 text-primary text-center">
+                    Our Articles
+                </p>
+
+            </div>
+        </div>
+        <div class="row mt-5 justify-content-center">
+
+            <div class="col-3 text-center mb-3" v-for="course in courseStore.courses" :key="course.id">
+                <div class="card" style="width: 18rem;height: 18rem;">
+                    <img :src="course.image" cover class="card-img-top" style="width: 18rem;height: 10rem;" alt="...">
+                    <div class="card-body mb-3">
+                        <h5 class="card-title">{{ course.title }}</h5>
+                        <router-link :to="'/articles/' + course.id" class="btn btn-primary">View Article</router-link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import { useCoursesStore } from '../stores/coursesStore';
+export default {
+    setup() {
+        const courseStore = useCoursesStore()
+        return {
+            courseStore
+        };
+    }
+}
+</script>
+
+<style scoped></style>

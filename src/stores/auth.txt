@@ -1,0 +1,85 @@
+// authStore.js
+import { defineStore } from "pinia";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { auth } from "../firebase/index";
+import router from "../router";
+import Swal from "sweetalert2";
+
+export const useAuthStore = defineStore("auth", {
+  state: () => ({
+    user: null,
+  }),
+  actions: {
+    async register(userCredentials) {
+      const { email, password } = userCredentials;
+      try {
+        // Step 1: Create user in Firebase Authentication
+        const authResult = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        // Step 2: Get the user's UID
+        const userUid = authResult.user.uid;
+        console.log("User UID:", userUid);
+
+        // Step 3: Update store with the current user
+        this.$state.user = authResult.user;
+        console.log("Current User:", authResult.user);
+
+        // Step 4: Show success message
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful!",
+          showConfirmButton: true,
+          timer: 1500,
+        });
+
+        // Step 5: Redirect to login page after a short delay (optional)
+        setTimeout(() => {
+          router.push("/auth/login");
+        }, 2000); // Redirect after 2 seconds (adjust as needed)
+      } catch (error) {
+        console.error("Registration error:", error.message);
+
+        // Handle specific error types
+        if (error.code === "auth/email-already-in-use") {
+          Swal.fire({
+            icon: "error",
+            text: "The provided email is already in use.",
+            title: "Registration Error",
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else if (error.code === "auth/invalid-email") {
+          Swal.fire({
+            icon: "error",
+            text: "The provided email is not valid.",
+            title: "Registration Error",
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else {
+          // Handle other errors or log them for debugging
+          console.error("Registration error:", error);
+          Swal.fire({
+            icon: "error",
+            text: "Registration failed. Please try again.",
+            title: "Registration Error",
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        }
+      }
+    },
+    // Add other actions as needed
+  },
+});

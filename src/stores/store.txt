@@ -1,0 +1,212 @@
+import { defineStore } from 'pinia';
+import {
+  getFirestore,
+  collection,
+  doc,
+  addDoc,
+  getDocs,
+  getDoc,
+  deleteDoc,
+  updateDoc,
+} from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import Swal from 'sweetalert2';
+import router from '../router';
+
+export const useCoursesStore = defineStore('courses', {
+  state: () => ({
+    courses: [],
+    singleCourse: null,
+  }),
+
+  getters: {
+    totalCourses: (state) => {
+      return state.courses.length;
+    },
+    filterCourses() {
+      return state.courses.filter((course) => {
+        return course.type === 'software';
+      });
+    },
+  },
+
+  actions: {
+    async addCourse(courseData) {
+      const { type, image, description, title, date, subject } = courseData;
+
+      try {
+        if (!type || !image || !description || !title || !date || !subject) {
+          throw new Error('All fields are required.');
+        }
+
+        const db = getFirestore();
+        const storage = getStorage();
+        const storageRef = ref(storage, `course_images/${image.name}`);
+        await uploadBytes(storageRef, image);
+        const imageUrl = await getDownloadURL(storageRef);
+
+        const courseDataWithImageUrl = {
+          type,
+          image: imageUrl,
+          description,
+          title,
+          date,
+          subject,
+        };
+
+        const courseCollection = collection(db, 'courses');
+        const docRef = await addDoc(courseCollection, courseDataWithImageUrl);
+
+        console.log('Document written with ID: ', docRef.id);
+
+        await Swal.fire({
+          icon: 'success',
+          title: 'Course Added Successfully!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        router.push('/');
+      } catch (error) {
+        console.error('Error adding document: ', error);
+        await Swal.fire({
+          icon: 'error',
+          title: 'Course Addition Error',
+          text: error.message,
+        });
+      }
+    },
+
+    async fetchAllCourses() {
+      try {
+        const db = getFirestore();
+        const coursesCollection = collection(db, 'courses');
+        const querySnapshot = await getDocs(coursesCollection);
+
+        const courses = [];
+        querySnapshot.forEach((doc) => {
+          courses.push({ id: doc.id, ...doc.data() });
+        });
+
+        const typeSorted = courses.sort((a, b) => {
+          const typeOrder = {
+            software: 1,
+            'information tech': 2,
+            cybersecurity: 3,
+          };
+          return typeOrder[a.type] - typeOrder[b.type];
+        });
+
+        this.courses = typeSorted;
+      } catch (error) {
+        console.error('Error fetching courses: ', error);
+        throw error;
+      }
+    },
+
+    async fetchSingleCourse(courseId) {
+      try {
+        const db = getFirestore();
+        const courseRef = doc(db, 'courses', courseId);
+        const docSnapshot = await getDoc(courseRef);
+
+        if (docSnapshot.exists()) {
+          this.singleCourse = { id: docSnapshot.id, ...docSnapshot.data() };
+        } else {
+          console.warn(`Course with ID ${courseId} does not exist.`);
+          this.singleCourse = null;
+        }
+      } catch (error) {
+        console.error('Error fetching single course: ', error.message);
+      }
+    },
+
+    async updateCourse({ courseId, updatedDetails }) {
+      try {
+        const { type, description, title, date, subject, image } = updatedDetails;
+        let imageUrl;
+
+        const userConfirmed = await Swal.fire({
+          title: 'Update Course',
+          text: 'Are you sure you want to update this course?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, update it!',
+        });
+
+        if (!userConfirmed.isConfirmed) {
+          return;
+        }
+
+        const db = getFirestore();
+        const courseRef = doc(db, 'courses', courseId);
+
+        if (image instanceof File) {
+          const storage = getStorage();
+          const storageRef = ref(storage, `course_images/${courseId}_${image.name}`);
+          await uploadBytes(storageRef, image);
+          imageUrl = await getDownloadURL(storageRef);
+        }
+
+        await updateDoc(courseRef, {
+          type,
+          description,
+          subject,
+          date,
+          title,
+          ...(imageUrl && { image: imageUrl }),
+        });
+
+        const index = state.courses.findIndex((course) => course.id === courseId);
+        if (index !== -1) {
+          const courseToUpdate = state.courses[index];
+          courseToUpdate.type = type;
+          courseToUpdate.description = description;
+          courseToUpdate.subject = subject;
+          courseToUpdate.date = date;
+          courseToUpdate.title = title;
+          courseToUpdate.image = imageUrl || courseToUpdate.image;
+        }
+
+        await Swal.fire({
+          icon: 'success',
+          title: 'Course updated successfully!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        router.push('/');
+      } catch (error) {
+        await Swal.fire({
+          icon: 'error',
+          title: 'Error Updating',
+          text: error.message || 'An error occurred while updating the course.',
+        });
+
+        console.error('Error updating course details: ', error);
+        throw error;
+      }
+    },
+
+    async deleteCourse(courseId) {
+      try {
+        const db = getFirestore();
+        const courseRef = doc(db, 'courses', courseId);
+
+        await deleteDoc(courseRef);
+
+        const updatedCourses = state.courses.filter((course) => course.id !== courseId);
+
+        state.courses = updatedCourses;
+
+        console.log('Course deleted successfully!');
+        router.push('/');
+      } catch (error) {
+        console.error('Error deleting course: ', error);
+        throw error;
+      }
+    },
+  },
+});
