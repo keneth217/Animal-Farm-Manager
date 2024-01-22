@@ -32,8 +32,9 @@
                                 </button>
                             </div>
                         </form>
-
-                        
+                        <div class="mb-3 text-center justify-items-center">
+                            Do not have an account? Click here to <router-link to="/auth/register">Register</router-link>
+                        </div>
                     </div>
                 </div>
             </div>
