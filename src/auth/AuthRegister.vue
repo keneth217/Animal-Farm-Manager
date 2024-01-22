@@ -10,10 +10,10 @@
                 <div class="col-md-6">
                     <div class="card border-primary mt-5">
                         <form @submit.prevent="registerUser" class="p-4">
-                            <!-- <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input v-model="register_form.email" type="email" class="form-control" id="email">
-                            </div> -->
+                            </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group">
