@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light" v-if="showNavbar">
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/"><i class="bi bi-diamond-fill me-2 text-warning"></i>KENWAVES</router-link>
+      <router-link class="navbar-brand" to="/"><i class="bi bi-diamond-fill me-2 text-warning"></i>FARM</router-link>
       <button class="navbar-toggler  border-warning text-warning" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -30,10 +30,10 @@ export default {
     // Navigation items that should be visible when there is no user
     const visibleNavItems = [
       { route: '/', link: 'home' },
-      { route: '/about', link: 'about' },
-      { route: '/blog', link: 'blog' },
-      { route: '/articles', link: 'Courses' },
-      { route: '/contacts', link: 'contacts' },
+      { route: '/animals', link: 'animals' },
+      // { route: '/blog', link: 'blog' },
+      // { route: '/articles', link: 'Courses' },
+      // { route: '/contacts', link: 'contacts' },
       { route: '/auth/login', link: 'Login' }
     ];
 
