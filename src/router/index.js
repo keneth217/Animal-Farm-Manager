@@ -6,9 +6,9 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/blogs",
-      name: "AdminBlogs",
-      component: () => import("../views/Admin/AdminBlogs.vue"),
+      path: "/animals",
+      name: "AnimalsView",
+      component: () => import("../views/Users/AnimalsView.vue"),
     },
     {
       path: "/update/:id",
@@ -26,20 +26,16 @@ const router = createRouter({
       component: () => import("../views/Users/AboutView.vue"),
     },
     {
-      path: "/blog",
-      name: "BlogView",
-      component: () => import("../views/Users/BlogView.vue"),
+      path: "/animals",
+      name: "AnimalsView",
+      component: () => import("../views/Users/AnimalsView.vue"),
     },
     {
       path: "/blog/:id",
       name: "BlogList",
       component: () => import("../views/Admin/BlogList.vue"),
     },
-    {
-      path: "/myself",
-      name: "AboutMe",
-      component: () => import("../views/Users/AboutMe.vue"),
-    },
+   
     {
       path: "/contacts",
       name: "ContactUs",
@@ -47,26 +43,22 @@ const router = createRouter({
     },
     {
       path: "/auth/login",
-      name: "Login",
-      component: () => import("../auth/Login.vue"),
+      name: "AuthLogin",
+      component: () => import("../auth/AuthLogin.vue"),
     },
     
-    // {
-    //   path: "/auth/register",
-    //   name: "AuthRegister",
-    //   component: () => import("../auth/AuthRegister.vue"),
-    // },
+    {
+      path: "/auth/register",
+      name: "AuthRegister",
+      component: () => import("../auth/AuthRegister.vue"),
+    },
 
     {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
       component: () => import("../views/Users/NotFound.vue"),
     },
-    {
-      path: "/articles",
-      name: "Aricles",
-      component: () => import("../views/Users/Articles.vue"),
-    },
+   
 
     {
       path: "/my/:id/:title",
@@ -74,9 +66,9 @@ const router = createRouter({
       component: () => import("../views/Users/SingleCourse.vue"),
     },
     {
-      path: "/blog",
-      name: "BlogView",
-      component: () => import("../views/Users/BlogView.vue"),
+      path: "/animals",
+      name: "AnimalsView",
+      component: () => import("../views/Users/AnimalsView.vue"),
     },
     {
       path: "/blog/:id",
