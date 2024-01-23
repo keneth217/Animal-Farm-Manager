@@ -100,77 +100,45 @@
     </transition>
 </template>
 <script>
-import BarChart from '../views/BarChart.vue'
-import PieChart from '../views/PieChart.vue'
-import { computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
+import BarChart from './Statistics.vue'
+import { ref, onMounted, computed, watch } from 'vue';
+import { useCoursesStore } from '../../stores/coursesStore';
+import { useBlogStore } from '../../stores/blogStore';
+import { useMessageStore } from '../../stores/contactsStore';
+import { useAuthStore } from '../../stores/authStore';
 
 export default {
-    components: {
-        BarChart,
-        PieChart
-    },
+    name: 'DashBoardDetails',
+    components: { BarChart },
+
     setup() {
-        const store = useStore();
+        const courseStore = useCoursesStore();
+        const messageStore = useMessageStore();
+        const blogStore = useBlogStore();
+       
 
-        // Trigger the action to fetch all animals and sort them by status
+        // Fetch data on component mount
         onMounted(async () => {
-            try {
-                await store.dispatch('fetchAllAnimals');
-                console.log('Fetched animals:', store.state.animals);
-            } catch (error) {
-                console.error('Error fetching animals:', error);
-            }
+            await courseStore.fetchAllCourses();
+            await messageStore.fetchAllMessages();
+            await blogStore.fetchAllBlogs();
+        
         });
 
-        const totalAnimals = computed(() => {
-            return (store.state.animals || []).length;
+        watch(() => courseStore.totalCourses, (newValue) => {
+            console.log('Total courses changed:', newValue);
         });
 
-        const availableCount = computed(() => {
-            const animals = store.state.animals || [];
-            return animals.filter(animal => animal.status === 'available').length;
-        });
-
-        const diedCount = computed(() => {
-            return (store.state.animals || []).filter(animal => animal.status === 'died').length;
-        });
-
-        const soldCount = computed(() => {
-            return (store.state.animals || []).filter(animal => animal.status === 'sold').length;
-        });
-        // typecount
-        const cowsCount = computed(() => {
-            return (store.state.animals || []).filter(animal => animal.type === 'cow').length;
-        });
-        const goatsCount = computed(() => {
-            return (store.state.animals || []).filter(animal => animal.type === 'goat').length;
-        });
-        const sheepsCount = computed(() => {
-            return (store.state.animals || []).filter(animal => animal.type === 'sheep').length;
-        });
-        //location count
-        const chelemeiCount = computed(() => {
-            return (store.state.animals || []).filter(animal => animal.location === 'chelemei').length;
-        });
-        const kamongilCount = computed(() => {
-            return (store.state.animals || []).filter(animal => animal.location === 'kamongil').length;
-        });
-        const kipsingeiCount = computed(() => {
-            return (store.state.animals || []).filter(animal => animal.location === 'kipsingei').length;
-        });
+        const totalCourses = computed(() => courseStore.totalCourses);
+        const totalMessages = computed(() => messageStore.totalMessages);
+        const totalBlogs = computed(() => blogStore.totalBlogs);
+      
 
         return {
-            totalAnimals,
-            availableCount,
-            diedCount,
-            soldCount,
-            cowsCount,
-            sheepsCount,
-            goatsCount,
-            chelemeiCount,
-            kamongilCount,
-            kipsingeiCount
+            totalCourses,
+            totalMessages,
+            totalBlogs,
+        
         };
     },
 };
