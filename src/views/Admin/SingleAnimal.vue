@@ -48,15 +48,15 @@
 <script>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import Swal from 'sweetalert2';
-import { useanimalsStore } from '../../stores/animalsStore';
+// import Swal from 'sweetalert2';
+import { useAnimalsStore } from '../../stores/animalsStore';
 
 export default {
     setup() {
         const route = useRoute();
         const loading = ref(true);
         const animal= ref({});
-        const singleAnimal= useanimalsStore();
+        const singleAnimal= useAnimalsStore();
         const isDeleting = ref(false);
 
         const fetchAnimal= async (animalId) => {
