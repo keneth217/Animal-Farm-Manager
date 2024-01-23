@@ -10,36 +10,17 @@ const router = createRouter({
       name: "AnimalsView",
       component: () => import("../views/Users/AnimalsView.vue"),
     },
-    {
-      path: "/update/:id",
-      name: "UpdateCourse",
-      component: () => import("../views/Admin/UpdateCourse.vue"),
-    },
+   
     {
       path: "/",
       name: "home",
       component: HomeView,
     },
-    {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/Users/AboutView.vue"),
-    },
+   
     {
       path: "/animals",
       name: "AnimalsView",
       component: () => import("../views/Users/AnimalsView.vue"),
-    },
-    {
-      path: "/blog/:id",
-      name: "BlogList",
-      component: () => import("../views/Admin/BlogList.vue"),
-    },
-   
-    {
-      path: "/contacts",
-      name: "ContactUs",
-      component: () => import("../views/Users/ContactUs.vue"),
     },
     {
       path: "/auth/login",
@@ -52,29 +33,28 @@ const router = createRouter({
       name: "AuthRegister",
       component: () => import("../auth/AuthRegister.vue"),
     },
-
+    {
+      path: "/contacts",
+      name: "ContactUs",
+      component: () => import("../views/Users/ContactUs.vue"),
+    },
     {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
       component: () => import("../views/Users/NotFound.vue"),
     },
-   
-
+  
     {
-      path: "/my/:id/:title",
-      name: "SingleCourse",
-      component: () => import("../views/Users/SingleCourse.vue"),
+      path: "/animal/:id/:owner",
+      name: "SingleAnimal",
+      component: () => import("../views/Users/SingleAnimal.vue"),
     },
     {
       path: "/animals",
       name: "AnimalsView",
       component: () => import("../views/Users/AnimalsView.vue"),
     },
-    {
-      path: "/blog/:id",
-      name: "BlogDetails",
-      component: () => import("../views/Users/BlogDetails.vue"),
-    },
+   
     //admin
     {
       path: "/dashboard",
@@ -91,13 +71,13 @@ const router = createRouter({
         },
         {
           path: "add",
-          name: "NewCourse",
-          component: () => import("../views/Admin/NewCourse.vue"),
+          name: "NewAnimal",
+          component: () => import("../views/Admin/NewAnimal.vue"),
         },
         {
           path: "update/:id",
-          name: "UpdateCourse",
-          component: () => import("../views/Admin/UpdateCourse.vue"),
+          name: "UpdateAnimal",
+          component: () => import("../views/Admin/UpdateAnimal.vue"),
         },
         {
           path: "new",
@@ -105,45 +85,16 @@ const router = createRouter({
           component: () => import("../views/Admin/NewMessage.vue"),
         },
         {
+          path: "animals",
+          name: "animalsView",
+          component: () => import("../views/Admin/animalsView.vue"),
+        },
+        {
           path: "single/:id",
-          name: "SingleArticle",
-          component: () => import("../views/Admin/SingleArticle.vue"),
+          name: "SingleAnimal",
+          component: () => import("../views/Admin/SingleAnimal.vue"),
         },
-        {
-          path: "courses",
-          name: "coursesView",
-          component: () => import("../views/Admin/coursesView.vue"),
-        },
-        {
-          path: "blog",
-          name: "NewBlog",
-          component: () => import("../views/Admin/NewBLog.vue"),
-        },
-        {
-          path: "blogs",
-          name: "AdminBlogs",
-          component: () => import("../views/Admin/AdminBlogs.vue"),
-        },
-        {
-          path: "blogs/:id",
-          name: "BlogList",
-          component: () => import("../views/Admin/BlogList.vue"),
-        },
-        {
-          path: "blogs/update/:id",
-          name: "UpdateBlog",
-          component: () => import("../views/Admin/UpdateBlog.vue"),
-        },
-        {
-          path: "topics/add/:id",
-          name: "SubTopic",
-          component: () => import("../views/Admin/SubTopic.vue"),
-        },
-        {
-          path: "topic/add/:id",
-          name: "CourseSubTopic",
-          component: () => import("../views/Admin/CourseSubTopic.vue"),
-        },
+        
       ],
     },
   ],
