@@ -1,9 +1,9 @@
 <template>
     <section class="min-vh-100 d-flex align-items-center text-center background">
-        <div class="container mt-5">
-            <div class="row justify-content-center">
+        <div class="container-fluid mb-3" >
+            <div class="row justify-content-center" >
                 <div class="col-md-6 text-primary mt-5 font-weight-bold text-center text-uppercase">
-                    <h6>Login Here</h6>
+                    <h6 class="p-3" style="background-color: rgba(0, 0, 0, 0.6);">Login Here</h6>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -100,7 +100,7 @@ export default {
 </script>
 <style scoped>
 .background {
-    background: url(../assets/BACK/12.jpg);
+    background: url(../assets/animals/calves.jpg);
     width: 100%;
     min-height: 100vh;
     text-align: center;
@@ -110,7 +110,6 @@ export default {
     background-position: center;
     background-size: cover;
     opacity: 1;
-
 
 }
 </style>
