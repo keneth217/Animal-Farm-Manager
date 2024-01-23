@@ -30,7 +30,7 @@ async function navigateAfterAction(message, icon = "success") {
     showConfirmButton: false,
     timer: 1500,
   });
-  router.push("/");
+  router.push("/dashboard");
 }
 
 export const useAnimalsStore = defineStore("animal", {
@@ -100,7 +100,7 @@ export const useAnimalsStore = defineStore("animal", {
         console.log("Updating animal with ID:", animalId);
         console.log("Updated details:", animalData);
         const userConfirmed = await Swal.fire({
-          owner: "Update animal",
+          title: "Update animal",
           text: "Are you sure you want to update this animal?",
           icon: "question",
           showCancelButton: true,
