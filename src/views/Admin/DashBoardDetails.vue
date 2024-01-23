@@ -45,7 +45,7 @@
     </section>
 </template>
 
-<script>
+<!-- <script>
 import BarChart from './Statistics.vue'
 import { ref, onMounted, computed, watch } from 'vue';
 import { useCoursesStore } from '../../stores/coursesStore';
@@ -88,7 +88,7 @@ export default {
         };
     },
 };
-</script>
+</script> -->
 
 
 
