@@ -58,8 +58,8 @@ const router = createRouter({
     //admin
     {
       path: "/dashboard",
-      name: "DashBoard",
-      component: () => import("../views/Admin/DashBoard.vue"),
+      name: "SideMenu",
+      component: () => import("../views/Admin/SideMenu.vue"),
       meta: {
         requiresAuth: true,
       },
