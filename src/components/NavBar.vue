@@ -33,7 +33,7 @@ export default {
       { route: '/animals', link: 'animals' },
       // { route: '/blog', link: 'blog' },
       // { route: '/articles', link: 'Courses' },
-      // { route: '/contacts', link: 'contacts' },
+      { route: '/contacts', link: 'contacts' },
       { route: '/auth/login', link: 'Login' }
     ];
 
