@@ -15,44 +15,44 @@
                         <div class="col-md-6 font-weight-bold  type text-uppercase">
                             <ul class="nav nav-tabs text-danger">
                                 <li class="nav-item">
-                                    <a class="nav-link" @click="changeCourseType('ALL')">ALL</a>
+                                    <a class="nav-link" @click="changeAnimalType('ALL')">ALL</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" @click="changeCourseType('cow')">cows</a>
+                                    <a class="nav-link" @click="changeAnimalType('cow')">cows</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" @click="changeCourseType('goats')">goats</a>
+                                    <a class="nav-link" @click="changeAnimalType('goats')">goats</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" @click="changeCourseType('sheep')">sheep
-                                        tech</a>
+                                    <a class="nav-link" @click="changeAnimalType('sheep')">sheeps</a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="text-uppercase ms-5"> total availableAnimals:<span class="text-primary">{{ totalCourses }}</span></div>
+                        <div class="text-uppercase ms-5"> total availableAnimals:<span class="text-primary">{{ totalAnimals }}</span></div>
                     </div>
 
                 </div>
             </div>
             <hr>
-            <div class="col text-center" v-if="course_data.length === 0">
+            <div class="col text-center" v-if="animal_data.length === 0">
                 <div class="d-flex justify-content-center">
                     <div class="spinner-border mx-auto text-warning" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
                 <h4>
-                    No records of animals found.Will be added sooon keep checking...
+                    No records of animals found.Will be added soon keep checking...
 
                 </h4>
             </div>
             <div v-else class="row justify-content-center">
-                <div class="col-md-4 col-lg-3 col-sm-12 mb-3 mx-auto" v-for="(course, index) in course_data" :key="index">
+                <div class="col-md-4 col-lg-3 col-sm-12 mb-3 mx-auto" v-for="(animal, index) in animal_data" :key="index">
                     <div class="card border-primary" style="width: 18rem; height: 18rem;">
-                        <img :src="course.image" class="card-img-top" style="width: 18rem;height: 10rem;" alt="...">
+                        <img :src="animal.image" class="card-img-top" style="width: 18rem;height: 10rem;" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">{{ course.type }}</h5>
-                            <router-link type="button" class="btn btn-info" :to="`/my/${course.id}/${course.title}`">view
+                            <h5 class="card-title">{{ animal.type }}</h5>
+                            <h5 class="card-title">{{ animal.owner}}</h5>
+                            <router-link type="button" class="btn btn-info" :to="`/animal/${animal.id}/${animal.owner}`">view
                                 more</router-link>
                         </div>
                     </div>
@@ -80,44 +80,44 @@
 
 <script>
 import { ref, onMounted, computed, watch } from 'vue';
-import { useCoursesStore } from '../../stores/coursesStore';
+import { useAnimalsStore } from '../../stores/animalsStore';
 
 export default {
     setup() {
-        const course_data = ref([]);
-        const courseStore = useCoursesStore();
+        const animal_data = ref([]);
+        const animalStore = useAnimalsStore();
         const itemsPerPage = 4;
-        // const total = courseStore.totalCourses
+        // const total = animalStore.totalanimals
         const currentPage = ref(1);
-        const currentCourseType = ref('ALL');
-        const totalCourses = computed(() => courseStore.totalCourses);
-        console.log(totalCourses)
+        const currentAnimalType = ref('ALL');
+        const totalAnimals = computed(() => animalStore.totalAnimals);
+        console.log(totalAnimals)
         // Watcher for totalMessages
-        watch(totalCourses, (newValue) => {
-            console.log('Total courses changed:', newValue);
+        watch(totalAnimals, (newValue) => {
+            console.log('Total animals changed:', newValue);
         });
 
-        const fetchCourses = async () => {
-            await courseStore.fetchAllCourses();
-            course_data.value = courseStore.courses;
+        const fetchAnimals = async () => {
+            await animalStore.fetchAllAnimals();
+            animal_data.value = animalStore.animals;
         };
 
-        const getFilteredCourseData = () => {
-            return currentCourseType.value === 'ALL'
-                ? course_data.value
-                : course_data.value.filter(course => {
-                    return currentCourseType.value === 'ALL' || course.type === currentCourseType.value;
+        const getFilteredAnimalData = () => {
+            return currentAnimalType.value === 'ALL'
+                ? animal_data.value
+                : animal_data.value.filter(animal => {
+                    return currentAnimalType.value === 'ALL' || animal.type === currentAnimalType.value;
                 });
         };
 
-        const paginatedCourseData = computed(() => {
-            const filteredData = getFilteredCourseData();
+        const paginatedAnimalData = computed(() => {
+            const filteredData = getFilteredAnimalData();
             const startIndex = (currentPage.value - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
             return filteredData.slice(startIndex, endIndex);
         });
 
-        const totalPages = computed(() => Math.ceil(getFilteredCourseData().length / itemsPerPage));
+        const totalPages = computed(() => Math.ceil(getFilteredAnimalData().length / itemsPerPage));
 
         const changePage = (page) => {
             if (page >= 1 && page <= totalPages.value) {
@@ -125,25 +125,25 @@ export default {
             }
         };
 
-        const changeCourseType = (type) => {
-            console.log('Changing course type to:', type);
-            currentCourseType.value = type;
+        const changeAnimalType = (type) => {
+            console.log('Changing animal type to:', type);
+            currentAnimalType.value = type;
             currentPage.value = 1;
-            fetchCourses();
+            fetchanimals();
         };
 
         onMounted(() => {
-            fetchCourses();
+            fetchAnimals();
         });
 
         return {
-            course_data,
-            paginatedCourseData,
+            animal_data,
+            paginatedAnimalData,
             currentPage,
             totalPages,
             changePage,
-            changeCourseType,
-            totalCourses
+            changeAnimalType,
+            totalAnimals
         };
     },
 };
