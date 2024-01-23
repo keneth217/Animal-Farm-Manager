@@ -43,7 +43,7 @@
             </h4>
         </div>
         <div v-else class="row justify-content-center">
-            <div class="col-md-4 col-lg-3 col-sm-12 mb-3 mx-auto" v-for="(animal, index) in paginatedanimalData"
+            <div class="col-md-4 col-lg-3 col-sm-12 mb-3 mx-auto" v-for="(animal, index) in paginatedAnimalData"
                 :key="index">
                 <div class="card border-primary" style="width: 18rem; height: 18rem;">
                     <img :src="animal.image" class="card-img-top" style="width: 18rem;height: 10rem;" alt="...">
@@ -98,7 +98,7 @@ export default {
             animal_data.value = animalStore.animals;
         };
 
-        const getFilteredanimalData = () => {
+        const getFilteredAnimalData = () => {
             return currentAnimalType.value === 'ALL'
                 ? animal_data.value
                 : animal_data.value.filter(animal => {
@@ -125,7 +125,7 @@ export default {
             console.log('Changing animal type to:', type);
             currentAnimalType.value = type;
             currentPage.value = 1;
-            fetchanimals();
+            fetchAnimals();
         };
 
         onMounted(() => {
