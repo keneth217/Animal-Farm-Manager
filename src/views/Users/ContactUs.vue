@@ -1,6 +1,6 @@
 <template>
     <section class="min-vh-100 d-flex align-items-center text-center background">
-        <div class="container-fluid mb-3">
+        <div class="container-fluid mb-3" style="background-color: rgba(0, 0, 0, 0.6);">
             <div class="row mt-5 ">
                 <div class="col">
                     <p class="fs-1 text-primary text-center">
@@ -8,8 +8,8 @@
                     </p>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-6 col-sm-12 ">
+            <div class="row justify-content-center" >
+                <div class="col-lg-8 col-md-6 col-sm-12 " >
                     <p class="fs-1 text-center text-dark">
                         Contacts
                     </p>
@@ -20,8 +20,6 @@
                         </p>
                         <p class="text-white">P.O Box - 2500 ,Nakuru</p>
                     </div>
-
-
                     <div class="text-center">
                         <p class="text-uppercase"> <i class="bi bi-telephone me-3 text-warning"></i>
                             <span class="text-primary">Phone:</span>
@@ -73,7 +71,7 @@
                                     <button class="btn btn-primary text-center" type="submit" :disabled="isSubmitting"
                                         @click="sent">
                                         <span v-if="!isSubmitting">SENT MESSAGE</span>
-                                        <span v-else>Senting ...</span>
+                                        <span v-else>Sending ...</span>
                                         <div v-if="isSubmitting" class="spinner-border text-warning" role="status">
                                             <span class="visually-hidden">Loading...</span>
                                         </div>
@@ -132,7 +130,7 @@ export default {
 <style scoped>
 .background {
 
-    background: url(../../assets/BACK/12.jpg);
+    background: url(../../assets/animals/IMG_20211211_084403_7.jpg);
     width: 100%;
     height: 100%;
     min-height: 100vh;
