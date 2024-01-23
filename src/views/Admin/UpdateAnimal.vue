@@ -18,7 +18,7 @@
                     <form @submit.prevent="handleSubmit" class="p-4">
                         <div class="mb-3">
                             <label for="status" class="form-label">Select animal type</label>
-                            <select name="name" v-model="animal_form.type" class="form-select" id="type">
+                            <select name="name" v-model="animal.type" class="form-select" id="type">
                                 <option value="cow">cow</option>
                                 <option value="goat">goat</option>
                                 <option value="sheep">sheep</option>
@@ -27,11 +27,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="owner" class="form-label">owner</label>
-                            <input type="text" v-model="animal_form.owner" class="form-control" id="owner">
+                            <input type="text" v-model="animal.owner" class="form-control" id="owner">
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Select animal location</label>
-                            <select name="name" v-model="animal_form.location" class="form-select" id="location">
+                            <select name="name" v-model="animal.location" class="form-select" id="location">
                                 <option value="chelemei">chelemei</option>
                                 <option value="kamongil">kamongil</option>
                                 <option value="kipsingei">kipsingei</option>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Select animal status</label>
-                            <select name="name" v-model="animal_form.status" class="form-select" id="status">
+                            <select name="name" v-model="animal.status" class="form-select" id="status">
                                 <option value="died">died</option>
                                 <option value="available">available</option>
                                 <option value="sold">sold</option>
@@ -121,7 +121,7 @@ export default {
                 console.log('Before update:', animal.value);
 
                 // Update the animal
-                await animalStore.updateanimal(animal.value.id, { ...animal.value });
+                await animalStore.updateAnimal(animal.value.id, { ...animal.value });
 
                 // Log the updated animal
                 console.log('After update:', animalStore.animals.find(c => c.id === animal.value.id));
