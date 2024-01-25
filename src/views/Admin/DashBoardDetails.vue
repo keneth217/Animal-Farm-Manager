@@ -11,24 +11,33 @@
                 <div class="col-lg-4 col-md-12 mx-auto">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">courses</h5>
-                            <p class="card-text">{{ totalCourses }}</p>
+                            <h5 class="card-title text-primary text-uppercase text-underline">population</h5>
+                            <p class="card-text">total</p>
+                            <p class="card-text">cows</p>
+                            <p class="card-text">goats</p>
+                            <p class="card-text">sheep</p>
+                           
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">blogs</h5>
-                            <p class="card-text">{{ totalBlogs }}</p>
+                            <h5 class="card-title text-primary text-uppercase text-underline">status</h5>
+                            <p class="card-text">available</p>
+                            <p class="card-text">sold</p>
+                            <p class="card-text">died</p>
+                            
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">messages</h5>
-                            <p class="card-text">{{ totalMessages }}</p>
+                            <h5 class="card-title text-primary text-uppercase text-underline">location</h5>
+                            <p class="card-text">chelemi</p>
+                            <p class="card-text">kipsingei</p>
+                            <p class="card-text">kamongil</p>
                         </div>
                     </div>
                 </div>
