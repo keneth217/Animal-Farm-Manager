@@ -6,9 +6,8 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import { Bar } from 'vue-chartjs';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
-import { useCoursesStore } from '../../stores/coursesStore';
-import { useBlogStore } from '../../stores/blogStore';
-import { useMessageStore } from '../../stores/contactsStore';
+import { useAnimalStore } from '../../stores/coursesStore';
+
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -16,26 +15,26 @@ export default {
     name: 'BarChart',
     components: { Bar },
     setup() {
-        const courseStore = useCoursesStore();
+        const courseStore = useAnimalStore();
         const messageStore = useMessageStore();
-        const blogStore = useBlogStore();
+        
      
 
         // Fetch data on component mount
         onMounted(async () => {
             await courseStore.fetchAllCourses();
-            await messageStore.fetchAllMessages();
-            await blogStore.fetchAllBlogs();
+           v
+           
            
         });
 
         const totalCourses = computed(() => courseStore.totalCourses);
-        const totalMessages = computed(() => messageStore.totalMessages);
-        const totalBlogs = computed(() => blogStore.totalBlogs);
+       
+        
    
 
         const chartData = ref({
-            labels: ['Courses', 'Blogs', 'Messages'],
+            labels: ['Total', 'Cows', 'sheep'],
             datasets: [
                 {
                     label: 'Total Count',
