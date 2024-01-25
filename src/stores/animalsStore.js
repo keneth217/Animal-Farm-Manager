@@ -26,7 +26,7 @@ async function uploadImage(image, storagePath) {
 async function navigateAfterAction(message, icon = "success") {
   await Swal.fire({
     icon,
-    owner: message,
+    title: message,
     showConfirmButton: false,
     timer: 1500,
   });
@@ -79,7 +79,7 @@ export const useAnimalsStore = defineStore("animal", {
         console.error("Error adding document: ", error);
         Swal.fire({
           icon: "error",
-          owner: "animal Addition Error",
+          title: "animal Addition Error",
           text: error.message,
         });
       }
@@ -142,7 +142,7 @@ export const useAnimalsStore = defineStore("animal", {
       } catch (error) {
         Swal.fire({
           icon: "error",
-          owner: "Error Updating",
+          title: "Error Updating",
           text: error.message || "An error occurred while updating the animal.",
         });
         console.error("Error updating animal details: ", error);
@@ -199,7 +199,7 @@ export const useAnimalsStore = defineStore("animal", {
     async deleteAnimal(animalId) {
       try {
         const userConfirmed = await Swal.fire({
-          owner: "Delete animal",
+          title: "Delete animal",
           text: "Are you sure you want to delete this animal?",
           icon: "question",
           showCancelButton: true,
