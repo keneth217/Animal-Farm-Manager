@@ -24,13 +24,13 @@
                                 <i class="bi bi-diagram-3-fill"></i> <span class="ms-1 d-none d-sm-inline">Animals</span>
                             </router-link>
                         </li>
-                        <li>
-                            <router-link to="/dashboard/customers" class="nav-link px-0 align-middle">
+                        <!-- <li>
+                            <router-link to="/dashboard/messages" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">messages</span>
                             </router-link>
-                        </li>
+                        </li> -->
                         <li>
-                            <router-link to="/dashboard/customers" class="nav-link px-0 align-middle">
+                            <router-link to="/dashboard/new/message" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">New messages</span>
                             </router-link>
                         </li>
