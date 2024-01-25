@@ -5,12 +5,8 @@ import { useAuthStore } from "../stores/authStore";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: "/animals",
-      name: "AnimalsView",
-      component: () => import("../views/Users/AnimalsView.vue"),
-    },
-   
+    
+
     {
       path: "/",
       name: "home",
@@ -46,13 +42,8 @@ const router = createRouter({
   
     {
       path: "/animal/:id/:owner",
-      name: "SingleAnimal",
-      component: () => import("../views/Users/SingleAnimal.vue"),
-    },
-    {
-      path: "/animals",
-      name: "AnimalsView",
-      component: () => import("../views/Users/AnimalsView.vue"),
+      name: "UserSingleAnimal",
+      component: () => import("../views/Users/UserSingleAnimal.vue"),
     },
    
     //admin
@@ -80,7 +71,7 @@ const router = createRouter({
           component: () => import("../views/Admin/UpdateAnimal.vue"),
         },
         {
-          path: "new",
+          path: "new/message",
           name: "NewMessage",
           component: () => import("../views/Admin/NewMessage.vue"),
         },
@@ -106,7 +97,7 @@ router.beforeEach((to, from, next) => {
 
   if (token) {
     // Token is available, user is authenticated
-    if (to.path === "/auth/login" || to.path === "/") {
+    if (to.path === "/auth/login" || to.path === "/"  || to.path === "/animals"  || to.path === "/contacts" ) {
       next("/dashboard");
     } else {
       next();
