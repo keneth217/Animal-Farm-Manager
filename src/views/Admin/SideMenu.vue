@@ -42,7 +42,7 @@
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
                                 class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">user</span>
+                            <span class="d-none d-sm-inline mx-1">LogOut</span>
                         </router-link>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <!-- <li><router-link class="dropdown-item" to="#">New project...</router-link></li>
@@ -54,20 +54,57 @@
                             <div>
                             </div>
                             <!-- <li><router-link class="dropdown-item" to="#">Sign out</router-link></li> -->
+                            <Logout />
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col card shadow border-primary mt-5 py-3 min-vh-100">
-                <!-- <DashBoard /> -->
+                <p class="lead text-center">{{ greetingMessage }}:<span class="text-primary text-center">{{ userEmail }}</span></p>
+              
                 <router-view></router-view>
             </div>
         </div>
     </div>
 </template>
 <script>
+import { computed, ref } from 'vue';
+import Logout from '../../auth/LogOut.vue';
+import { useAuthStore } from '../../stores/authStore';
+import { onMounted } from 'vue';
 
+export default {
+    components: {
+        Logout,
+    },
+    setup() {
+        const authStore = useAuthStore();
+        const userEmail = ref(null);
+
+        onMounted(async () => {
+            await authStore.fetchUser();
+            userEmail.value = authStore.user?.email;
+        });
+
+        const greetingMessage = computed(() => {
+            const currentTime = new Date().getHours();
+            if (currentTime < 12) {
+                return 'Good morning';
+            } else if (currentTime < 18) {
+                return 'Good afternoon';
+            } else {
+                return 'Good evening';
+            }
+        });
+
+        return {
+            greetingMessage,
+            userEmail,
+        };
+    },
+};
 </script>
+
 <style>
 
 </style>
