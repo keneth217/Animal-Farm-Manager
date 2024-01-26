@@ -6,7 +6,7 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import { Bar } from 'vue-chartjs';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
-import { useAnimalStore } from '../../stores/coursesStore';
+import { useAnimalsStore} from '../../stores/animalsStore';
 
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
@@ -15,58 +15,54 @@ export default {
     name: 'BarChart',
     components: { Bar },
     setup() {
-        const courseStore = useAnimalStore();
-        const messageStore = useMessageStore();
+        const animalStore= useAnimalsStore();
+       
         
      
 
         // Fetch data on component mount
         onMounted(async () => {
-            await courseStore.fetchAllCourses();
-           v
+            await animalStore.fetchAllAnimals();
+           
            
            
         });
 
-        const totalCourses = computed(() => courseStore.totalCourses);
+        const totalAnimals= computed(() => animalStore.totalAnimals);
        
         
    
 
         const chartData = ref({
-            labels: ['Total', 'Cows', 'sheep'],
+            labels: ['Total', 'Cows', 'sheep','Goats'],
             datasets: [
                 {
                     label: 'Total Count',
                     backgroundColor: ['#f87979', '#5b9bd5', '#70ad47', '#5b9bd5'], // Different colors for each bar
-                    data: [totalCourses.value, totalBlogs.value, totalMessages.value],
+                    data: [totalAnimals.value],
                 },
             ],
         });
 
         // Watchers for store changes
         watch(
-            [totalCourses, totalMessages, totalBlogs],
-            ([newTotalCourses, newTotalMessages, newTotalBlogs]) => {
-                console.log('Total courses changed:', newTotalCourses);
-                console.log('Total messages changed:', newTotalMessages);
-                console.log('Total blogs changed:', newTotalBlogs);
-             
+            [totalAnimals],
+            ([newTotalAnimals]) => {
+                console.log('Total animalschanged:', newTotalAnimals);
+                
 
                 // Update the chart data when any of the totals change
                 chartData.value.datasets[0].data = [
-                    newTotalCourses,
-                    newTotalBlogs,
-                    newTotalMessages,
+                    newTotalAnimals,
+                    
                   
                 ];
             }
         );
 
         return {
-            totalCourses,
-            totalMessages,
-            totalBlogs,
+            totalAnimals,
+           
             chartData,
            
         };
