@@ -12,7 +12,7 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title text-primary text-uppercase text-underline">population</h5>
-                            <p class="card-text">total</p>
+                            <p class="card-text">total:{{ totalAnimals }}</p>
                             <p class="card-text">cows</p>
                             <p class="card-text">goats</p>
                             <p class="card-text">sheep</p>
@@ -54,50 +54,43 @@
     </section>
 </template>
 
-<!-- <script>
+<script>
 import BarChart from './Statistics.vue'
 import { ref, onMounted, computed, watch } from 'vue';
-import { useCoursesStore } from '../../stores/coursesStore';
-import { useBlogStore } from '../../stores/blogStore';
-import { useMessageStore } from '../../stores/contactsStore';
-import { useAuthStore } from '../../stores/authStore';
+import { useAnimalsStore } from '../../stores/animalsStore';
+
 
 export default {
     name: 'DashBoardDetails',
     components: { BarChart },
 
     setup() {
-        const courseStore = useCoursesStore();
-        const messageStore = useMessageStore();
-        const blogStore = useBlogStore();
+        const animalStore = useAnimalsStore ();
+        
        
 
         // Fetch data on component mount
         onMounted(async () => {
-            await courseStore.fetchAllCourses();
-            await messageStore.fetchAllMessages();
-            await blogStore.fetchAllBlogs();
+            await animalStore.fetchAllAnimals();
+            
         
         });
 
-        watch(() => courseStore.totalCourses, (newValue) => {
-            console.log('Total courses changed:', newValue);
+        watch(() =>  animalStore.totalAnimals, (newValue) => {
+            console.log('Total animals changed:', newValue);
         });
 
-        const totalCourses = computed(() => courseStore.totalCourses);
-        const totalMessages = computed(() => messageStore.totalMessages);
-        const totalBlogs = computed(() => blogStore.totalBlogs);
-      
+        const totalAnimals = computed(() => animalStore.totalAnimals);
+        
 
         return {
-            totalCourses,
-            totalMessages,
-            totalBlogs,
+            totalAnimals,
+           
         
         };
     },
 };
-</script> -->
+</script>
 
 
 
