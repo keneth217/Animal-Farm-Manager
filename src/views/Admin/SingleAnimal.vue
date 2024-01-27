@@ -15,16 +15,16 @@
             </div>
             <div v-else-if="Object.keys(animal).length !== 0" class="col justify-items-start">
 
-                <div class="card border-primary mx-auto" style="width: 25rem; height: 30rem;">
-                    <img :src="animal.image" class="card-img-top" style="width: 25rem;height: 15rem;" alt="...">
+                <div class="card border-primary mx-auto mb-5" style="width: 25rem; height: 38rem;">
+                    <img :src="animal.image" class="card-img-top" style="width: 25rem;height: 20rem;" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-success">Type: {{ animal.type }}</h5>
                         <p class="card-text text-danger">owner: {{ animal.owner }}</p>
                         <p class="card-text text-danger">Location: {{ animal.location }}</p>
                         <p class="card-text text-danger">status: {{ animal.status }}</p>
                         <p class="card-text text-danger">Date added: {{ animal.date }}</p>
-                        <!-- <p class="card-text text-danger">Subject: {{ animal.subject }}</p>
-                            <p class="card-text text-primary">Description: {{ animal.description }}</p> -->
+                       
+                         <p class="card-text text-primary">Description: {{ animal.description }}</p> 
                     </div>
                     <div class="d-flex justify-content-center card-title">
                         <router-link :to="`/dashboard/update/${animal.id}`">
