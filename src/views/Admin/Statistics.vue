@@ -29,31 +29,33 @@ export default {
         });
 
         const totalAnimals= computed(() => animalStore.totalAnimals);
-       
+       const totalGoats=computed(()=> animalStore.totalGoats)
+       const totalCows=computed(()=> animalStore.totalCows)
+       const totalSheep=computed(()=> animalStore.totalSheep)
         
    
 
         const chartData = ref({
-            labels: ['Total', 'Cows', 'sheep','Goats'],
+            labels: ['Total', 'Goats','Cows', 'sheep',],
             datasets: [
                 {
                     label: 'Total Count',
                     backgroundColor: ['#f87979', '#5b9bd5', '#70ad47', '#5b9bd5'], // Different colors for each bar
-                    data: [totalAnimals.value],
+                    data: [totalAnimals.value,totalGoats.value,totalCows.value,totalSheep.value],
                 },
             ],
         });
 
         // Watchers for store changes
         watch(
-            [totalAnimals],
+            [totalAnimals,totalGoats,totalSheep,totalCows],
             ([newTotalAnimals]) => {
                 console.log('Total animalschanged:', newTotalAnimals);
                 
 
                 // Update the chart data when any of the totals change
                 chartData.value.datasets[0].data = [
-                    newTotalAnimals,
+                    newTotalAnimals,totalGoats,totalCows,totalSheep,
                     
                   
                 ];
@@ -62,7 +64,9 @@ export default {
 
         return {
             totalAnimals,
-           
+            totalGoats,
+            totalCows,
+            totalSheep,
             chartData,
            
         };
