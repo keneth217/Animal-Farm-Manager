@@ -15,10 +15,10 @@
                                 <a class="nav-link" @click="changeAnimalType('ALL')">ALL</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" @click="changeAnimalType('cows')">cows</a>
+                                <a class="nav-link" @click="changeAnimalType('cow')">cows</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" @click="changeAnimalType('goats')">goats</a>
+                                <a class="nav-link" @click="changeAnimalType('goat')">goats</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" @click="changeAnimalType('sheep')">sheep</a>
@@ -43,10 +43,10 @@
             </h4>
         </div>
         <div v-else class="row justify-content-center">
-            <div class="col-md-4 col-lg-3 col-sm-12 mb-3 mx-auto" v-for="(animal, index) in paginatedAnimalData"
+            <div class="col-md-4 col-sm-12 mb-3 mx-auto" v-for="(animal, index) in paginatedAnimalData"
                 :key="index">
-                <div class="card border-primary" style="width: 18rem; height: 18rem;">
-                    <img :src="animal.image" class="card-img-top" style="width: 18rem;height: 10rem;" alt="...">
+                <div class="card border-primary" style="width: 20rem; height: 30rem;">
+                    <img :src="animal.image" class="card-img-top" style="width: 20rem;height: 20rem;" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ animal.type }}</h5>
                         <h5 class="card-title">{{ animal.owner }}</h5>
@@ -82,7 +82,7 @@ export default {
     setup() {
         const animal_data = ref([]);
         const animalStore = useAnimalsStore();
-        const itemsPerPage = 4;
+        const itemsPerPage = 6;
         // const total = animalStore.totalanimals
         const currentPage = ref(1);
         const currentAnimalType = ref('ALL');
@@ -127,6 +127,12 @@ export default {
             currentPage.value = 1;
             fetchAnimals();
         };
+//         changeAnimalType(animalType) {
+//     console.log('Changing animal type to:', animalType);
+//     currentAnimalType.value = animalType;
+//     currentPage.value = 1;
+//     fetchAnimals();
+// }
 
         onMounted(() => {
             fetchAnimals();
