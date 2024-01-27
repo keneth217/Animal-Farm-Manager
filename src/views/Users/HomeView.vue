@@ -15,6 +15,7 @@
                 <router-link class="btn btn-outline-primary btn-lg mb-3" to="/auth/login" role="button">Login</router-link>
               </div>
             </div>
+            <div class="text-light"><span class="me-2">Are you in need of any website</span><span class="me-2"><router-link class="mb-3" to="/contacts" role="button">Contact Us</router-link></span></div>
           </div>
         </div>
       </div>
