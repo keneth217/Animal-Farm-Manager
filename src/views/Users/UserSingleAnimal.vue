@@ -2,7 +2,7 @@
     <section class="min-vh-100 d-flex bg-dark text-white">
         <div class="container-fluid mt-5">
             <div class="row align-items-center">
-                <div class="row justify-content-center p-2">
+                <div class="row justify-content-center mt-3 p-2">
                     <div class="col-md-6 text-primary font-weight-bold text-center text-uppercase">
                         <h6>animal details</h6>
                     </div>
@@ -16,13 +16,14 @@
                 </div>
                 <div v-else-if="Object.keys(animal).length !== 0" class="row
                 ">
-                    <div class="row text-center">
+                    <div class="row text-start">
                         <div class="col">
                             <div class=" mt-3  font-weight-bold  ">
-                                <p>Updated on {{ animal.date }} </p>
+                             
+                                <p> <span class="me-2 text-primary"><i class="bi bi-calendar3"></i></span><span class="ml-3">Updated on {{ animal.date }}</span> </p>
                             </div>
                             <div class="mt-3  font-weight-bold  ">
-                                <h3>{{ animal.owner }} </h3>
+                                <h3><span class="me-2 text-primary"><i class="bi bi-person-hearts"></i></span>{{ animal.owner }}s'</h3>
                             </div>
                         </div>
                     </div>
