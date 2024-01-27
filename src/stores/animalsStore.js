@@ -41,8 +41,18 @@ export const useAnimalsStore = defineStore("animal", {
 
   getters: {
     totalAnimals: (state) => state.animals.length,
-    filterAnimals: (state) =>
-      state.animals.filter((animal) => animal.type === "cow"),
+    totalGoats: (state) => state.animals.filter((animal) => animal.type === "goat").length,
+    totalCows: (state) => state.animals.filter((animal) => animal.type === "cow").length,
+    totalSheep: (state) => state.animals.filter((animal) => animal.type === "sheep").length,
+    //location
+    totalChelemei: (state) => state.animals.filter((animal) => animal.location === "chelemei").length,
+    totalKamongil: (state) => state.animals.filter((animal) => animal.location === "kamongil").length,
+    totalKipsingei: (state) => state.animals.filter((animal) => animal.location === "kipsingei").length,
+    //status
+    totalAvailable: (state) => state.animals.filter((animal) => animal.status === "available").length,
+    totalSold: (state) => state.animals.filter((animal) => animal.status === "sold").length,
+    totalDied: (state) => state.animals.filter((animal) => animal.status === "died").length,
+    // filterAnimals: (state) =>state.animals.filter((animal) => animal.type === "cow"),
   },
 
   actions: {
