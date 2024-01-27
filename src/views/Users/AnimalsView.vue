@@ -28,7 +28,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="text-uppercase ms-5"> total availableAnimals:
+              <div class="text-uppercase ms-5"> total Animals:
                 <span class="text-primary">{{ totalAnimals }}</span>
               </div>
             </div>
@@ -44,12 +44,12 @@
         </div>
         <div v-else>
           <div class="row justify-content-center">
-            <div class="col-md-4 col-lg-3 col-sm-12 mb-3 mx-auto" v-for="(animal, index) in paginatedAnimalData" :key="index">
-              <div class="card border-primary" style="width: 18rem; height: 18rem;">
-                <img :src="animal.image" class="card-img-top" style="width: 18rem;height: 10rem;" alt="...">
+            <div class="col-md-4 col-sm-12 mb-3 " v-for="(animal, index) in paginatedAnimalData" :key="index">
+              <div class="card border-primary" style="width: 20rem; height: 30rem;">
+                <img :src="animal.image" class="card-img-top" style="width: 20rem;height: 20rem;" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">{{ animal.type }}</h5>
-                  <h5 class="card-title">{{ animal.owner}}</h5>
+                  <h5 class="card-title">Type:{{ animal.type }}</h5>
+                  <h5 class="card-title">Owner:{{ animal.owner}}</h5>
                   <router-link type="button" class="btn btn-info" :to="`/animal/${animal.id}/${animal.owner}`">View More</router-link>
                 </div>
               </div>
@@ -86,7 +86,7 @@
     setup() {
       const animal_data = ref([]);
       const animalStore = useAnimalsStore();
-      const itemsPerPage = 4;
+      const itemsPerPage = 6;
       const currentPage = ref(1);
       const currentAnimalType = ref('ALL');
       const totalAnimals = computed(() => animalStore.totalAnimals);
