@@ -13,9 +13,9 @@
                         <div class="card-body">
                             <h5 class="card-title text-primary text-uppercase text-underline">population</h5>
                             <p class="card-text">total:{{ totalAnimals }}</p>
-                            <p class="card-text">cows</p>
-                            <p class="card-text">goats</p>
-                            <p class="card-text">sheep</p>
+                            <p class="card-text">cows:{{totalCows  }}</p>
+                            <p class="card-text">goats:{{ totalGoats }}</p>
+                            <p class="card-text">sheep:{{ totalSheep }}</p>
                            
                         </div>
                     </div>
@@ -24,9 +24,9 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title text-primary text-uppercase text-underline">status</h5>
-                            <p class="card-text">available</p>
-                            <p class="card-text">sold</p>
-                            <p class="card-text">died</p>
+                            <p class="card-text">available:{{totalAvailable }}</p>
+                            <p class="card-text">sold:{{totalSold  }}</p>
+                            <p class="card-text">died:{{ totalDied }}</p>
                             
                         </div>
                     </div>
@@ -35,9 +35,9 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title text-primary text-uppercase text-underline">location</h5>
-                            <p class="card-text">chelemi</p>
-                            <p class="card-text">kipsingei</p>
-                            <p class="card-text">kamongil</p>
+                            <p class="card-text">chelemi:{{ totalChelemei }}</p>
+                            <p class="card-text">kipsingei:{{  totalKipsingei }}</p>
+                            <p class="card-text">kamongil:{{  totalKamongil}}</p>
                         </div>
                     </div>
                 </div>
@@ -79,14 +79,23 @@ export default {
         watch(() =>  animalStore.totalAnimals, (newValue) => {
             console.log('Total animals changed:', newValue);
         });
-
+//type
         const totalAnimals = computed(() => animalStore.totalAnimals);
-        
-
+        const totalGoats = computed(() => animalStore.totalGoats);
+        const totalCows = computed(() => animalStore.totalCows);
+        const totalSheep = computed(() => animalStore.totalSheep);
+        //location
+        const totalChelemei=computed(()=>animalStore.totalChelemei)
+        const totalKipsingei=computed(()=>animalStore.totalKipsingei)
+        const totalKamongil=computed(()=>animalStore.totalKamongil)
+        //status
+        const totalAvailable=computed(()=>animalStore.totalAvailable)
+        const totalDied=computed(()=>animalStore.totalDied)
+        const totalSold=computed(()=>animalStore.totalSold)
         return {
-            totalAnimals,
-           
-        
+            totalAnimals,totalGoats,totalSheep,totalCows,
+            totalChelemei,totalKamongil,totalKipsingei,
+            totalSold,totalDied,totalAvailable
         };
     },
 };
